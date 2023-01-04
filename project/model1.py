@@ -1,5 +1,7 @@
 import os
 
+from model_generator import ModelGenerator
+
 from tensorflow import keras
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import Sequential
@@ -7,6 +9,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, CSVLogger, EarlyStopping
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+
 
 
 trainGenerator = keras.utils.image_dataset_from_directory(
@@ -24,28 +27,36 @@ validationGenerator = keras.utils.image_dataset_from_directory(
     batch_size=32,
     image_size=(32, 32))
 
-model = Sequential()
+modelgenerator = ModelGenerator()
 
-model.add(Conv2D(128, (3, 3), strides = 1, activation = 'relu', input_shape = (32, 32, 1)))
-model.add(MaxPooling2D((2, 2), strides = (2, 2), padding = 'same'))
+layers = []
 
-model.add(Conv2D(128, (3, 3), strides = 1, activation = 'relu'))
-model.add(MaxPooling2D((2, 2), strides = (2, 2), padding = 'same'))
+layers.append(Conv2D(128, (3, 3), strides = 1, activation = 'relu', input_shape = (32, 32, 1)))
+layers.append(MaxPooling2D((2, 2), strides = (2, 2), padding = 'same'))
 
-model.add(Conv2D(128, (3, 3), strides = 1, activation = 'relu'))
-model.add(MaxPooling2D((2, 2), strides = (2, 2), padding = 'same'))
+layers.append(Conv2D(128, (3, 3), strides = 1, activation = 'relu'))
+layers.append(MaxPooling2D((2, 2), strides = (2, 2), padding = 'same'))
 
-model.add(Flatten())
+layers.append(Conv2D(128, (3, 3), strides = 1, activation = 'relu'))
+layers.append(MaxPooling2D((2, 2), strides = (2, 2), padding = 'same'))
 
-model.add(Dense(128, activation = 'relu', kernel_initializer = 'he_uniform'))
-model.add(Dropout(0.1))
+layers.append(Flatten())
 
-model.add(Dense(100, activation = 'relu', kernel_initializer = 'he_uniform'))
-model.add(Dropout(0.1))
+layers.append(Dense(128, activation = 'relu', kernel_initializer = 'he_uniform'))
+layers.append(Dropout(0.1))
 
-model.add(Dense(46, activation = 'softmax'))
+layers.append(Dense(100, activation = 'relu', kernel_initializer = 'he_uniform'))
+layers.append(Dropout(0.1))
 
+layers.append(Dense(46, activation = 'softmax'))
+
+modelgenerator.create_model(layers)
+modelgenerator.show_model()
+
+model = modelgenerator.model
 model.compile(optimizer = Adam(learning_rate = 1e-3, decay = 1e-5), loss = 'categorical_crossentropy', metrics = ['accuracy'])
+
+
 
 if not os.path.isdir('Model_1'):
     os.mkdir('Model_1')
