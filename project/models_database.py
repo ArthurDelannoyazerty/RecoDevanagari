@@ -19,4 +19,24 @@ class ModelsDatabase():
                               Dense(46, activation = 'softmax')]
         self.layers_models.append(self.layers_model1)
 
+        self.layers_model2 = [Conv2D(64, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+                              MaxPooling2D((2, 2)),
+                              Conv2D(128, (3, 3), activation='relu'),
+                              MaxPooling2D((2, 2)),
+                              Conv2D(256, (3, 3), activation='relu'),
+                              Flatten(),
+                              Dense(512, activation='relu'),
+                              Dense(92, activation='softmax')]
+        self.layers_models.append(self.layers_model2)
+
+        self.layers_model3 = [LSTM(128, input_shape=(None, 28, 28, 1)),
+                              Dense(92, activation='softmax')]
+        self.layers_models.append(self.layers_model3)
+
+        self.layers_model4 = [Conv2D(64, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+                              Attention(128),
+                              Dense(92, activation='softmax')]
+        self.layers_models.append(self.layers_model4)
+
+
 
