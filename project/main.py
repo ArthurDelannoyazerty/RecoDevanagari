@@ -6,7 +6,7 @@ from model_train_organisator import ModelTrainOrganisator
 
 #load parameters
 model_creation_parameters = ModelCreationParameters()
-model_database = ModelsDatabase()
+model_database = ModelsDatabase(model_creation_parameters)
 layers_models = model_database.layers_models
 
 #load models
