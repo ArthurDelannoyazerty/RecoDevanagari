@@ -70,7 +70,7 @@ class ModelTrainOrganisator:
         plt.ylabel('accuracy')
         plt.xlabel('epoch')
         plt.legend(['train', 'test'], loc='upper left')
-        plt.savefig(path_folder + 'accuracy.png')
+        plt.savefig(path_folder + '/accuracy.png')
         
         # summarize history for loss
         plt.plot(history.history['loss'])
@@ -79,5 +79,5 @@ class ModelTrainOrganisator:
         plt.ylabel('loss')
         plt.xlabel('epoch')
         plt.legend(['train', 'test'], loc='upper left')
-        plt.savefig(path_folder + 'loss.png')
+        plt.savefig(path_folder + '/loss.png')
         
