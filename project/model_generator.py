@@ -1,4 +1,7 @@
 import visualkeras
+import os
+
+from pathlib import Path
 
 from tensorflow.keras.models import Sequential
 
@@ -15,5 +18,12 @@ class ModelGenerator:
         if model_creation_parameters.show_model:
             visualkeras.layered_view(self.model, legend=True).show()
         if model_creation_parameters.save_model:
-            path = 'model_img/model'+ str(number_model+1) +'.png'
-            visualkeras.layered_view(self.model, legend=True,  to_file=path)
+            path_folder = model_creation_parameters.path_save_models + "/model" + str(number_model) + "/model_img"
+            
+            path = Path(path_folder)
+            path.mkdir(parents=True, exist_ok=True)
+            
+            filename = "layers_model.png"
+            
+            final_path = path_folder + "/" + filename
+            visualkeras.layered_view(self.model, legend=True,  to_file=final_path)

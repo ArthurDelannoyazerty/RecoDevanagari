@@ -6,7 +6,7 @@ from model_train_organisator import ModelTrainOrganisator
 
 #load parameters
 model_creation_parameters = ModelCreationParameters()
-model_database = ModelsDatabase()
+model_database = ModelsDatabase(model_creation_parameters)
 layers_models = model_database.layers_models
 
 #load models
@@ -19,5 +19,5 @@ for i in range(len(layers_models)):
     model_generator.show_model(model_creation_parameters, i)
 
 #train models
-model_train_organisator = ModelTrainOrganisator(models)
+model_train_organisator = ModelTrainOrganisator(models, model_creation_parameters)
 model_train_organisator.train_all_models()
