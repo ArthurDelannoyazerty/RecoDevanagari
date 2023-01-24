@@ -19,7 +19,7 @@ class ModelsDatabase():
                               Dense(model_creation_parameters.number_output, activation = 'softmax')]
         self.layers_models.append(self.layers_model1)
 
-        self.layers_model2 = [Dense(128, activation = 'relu', kernel_initializer = 'he_uniform'),
+        self.layers_model2 = [Dense(128, activation = 'relu', kernel_initializer = 'he_uniform', input_shape = (32, 32, 1)),
                               Dense(128, activation = 'relu', kernel_initializer = 'he_uniform'),
                               Dense(128, activation = 'relu', kernel_initializer = 'he_uniform'),
                               Dense(128, activation = 'relu', kernel_initializer = 'he_uniform'),
