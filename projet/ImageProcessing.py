@@ -2,8 +2,7 @@ import cv2
 import numpy as np
 import pytesseract
 
-
-def img_bgr_2_gray(x,y,w,h):
+def img_bgr_2_gray():
     
     src = cv2.imread("reco中文/ImageProcessing/Test/chtxt.png")
     bg = cv2.dilate(src, np.ones((5,5), dtype=np.uint8))
@@ -40,4 +39,5 @@ def img_bgr_2_gray(x,y,w,h):
         i += 1
 
     cv2.imwrite("reco中文/ImageProcessing/Result/test.png", im2)
-    
+
+print(img_bgr_2_gray())
